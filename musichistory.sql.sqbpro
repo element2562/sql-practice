@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:\Users\jacob\workspace\csharp\exercises\sql-practice\musichistory.db" foreign_keys="1"/><window><current_tab id="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="150"/><column_width id="3" width="3372"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="Album"/><default_encoding codec=""/><browsetable_info data="AAAAAA=="/></tab_browse><tab_sql><sql name="SQL 1">-- 1.
+SELECT * FROM Genre;
+-- 2.
+INSERT INTO Artist VALUES (NULL, &quot;Jacob Henderson&quot;, 1997);
+SELECT * FROM Artist;
+-- 3.
+INSERT INTO Album VALUES (NULL, &quot;The Jacob Project&quot;, &quot;2018&quot;, 205, &quot;Atlantic&quot;, 33, 2);
+SELECT * FROM Album;
+-- 4.
+INSERT INTO Song VALUES (NULL, &quot;Falling Short&quot;, 21, &quot;2018&quot;, 2, 33, 25);
+SELECT * FROM Song;
+-- 5.
+/** Write a SELECT query that provides the song titles, album title, 
+and artist name for all of the data you just entered in. Use the LEFT
+ JOIN keyword sequence to connect the tables, and the WHERE keyword to 
+ filter the results to the album and artist you added**/
+ SELECT s.Title, a.Title, ar.ArtistName
+ FROM Song s
+ JOIN Album a ON s.AlbumId = a.AlbumId
+ LEFT JOIN Artist ar ON s.ArtistId = ar.ArtistId
+ WHERE ar.ArtistName = &quot;Jacob Henderson&quot;;
+-- 6. &amp; 7.
+SELECT s.Title, s.SongLength, a.Label, g.Label
+FROM Song s
+JOIN Album a ON s.AlbumId = a.AlbumId
+JOIN Genre g ON a.GenreId = g.GenreId
+WHERE s.SongLength &gt;= 250;
+-- 8.
+SELECT a.Title, COUNT(s.SongId)
+FROM Song s 
+JOIN Album a ON s.AlbumId = a.AlbumId
+GROUP BY s.AlbumId;
+-- 9.
+SELECT ar.ArtistName, COUNT(s.SongId)
+FROM Song s
+JOIN Artist ar ON s.ArtistId = ar.ArtistId
+GROUP BY s.ArtistId;
+-- 10.
+SELECT g.Label, COUNT(s.SongId)
+FROM Song s 
+JOIN Genre g ON s.GenreId = g.GenreId
+GROUP by s.GenreId;
+-- 11.
+SELECT g.Label, COUNT(s.ArtistId)
+FROM Song s
+JOIN Genre g ON s.GenreId = g.GenreId
+GROUP BY s.ArtistId;
+-- 12.
+SELECT a.Label, MAX(a.AlbumLength)
+FROM Album a;
+-- 13. &amp; 14.
+SELECT a.Title, s.Title, MAX(s.SongLength)
+FROM Song s
+JOIN album a ON s.AlbumId = a.AlbumId;
+ </sql><current_tab id="0"/></tab_sql></sqlb_project>
